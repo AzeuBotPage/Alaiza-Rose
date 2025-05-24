@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bukidnon Tourist Portal</title>
+  <link rel="icon" type="image/png" href="./seal-logo.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #daf3d7, #8dbc74);
+      color: #2c3e22;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #4a7c2e;
+      color: #e9f3d9;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-weight: 300;
+      font-size: 1.2rem;
+    }
+
+    nav {
+      background: #acc996;
+      padding: 1rem 1em;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    nav a {
+      color: #2c3e22;
+      font-weight: 600;
+      font-size: 1.0rem;
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      text-align: right;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background-color: #4a7c2e;
+      color: #e9f3d9;
+      outline: none;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto 4rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: #f4fbefcc;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(74, 124, 46, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(74, 124, 46, 0.45);
+    }
+
+    section h2 {
+      margin-bottom: 1rem;
+      color: #417b1f;
+      border-bottom: 3px solid #4a7c2e;
+      padding-bottom: 0.3rem;
+      font-size: 2rem;
+    }
+
+    #home p,
+    #about p {
+      font-size: 1.1rem;
+      color: #3c4e1a;
+    }
+
+    .tourist-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    article.spot {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+      max-width: 300px;
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    article.spot:hover,
+    article.spot:focus-within {
+      box-shadow: 0 9px 25px rgba(0, 0, 0, 0.22);
+    }
+
+    article.spot img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 4px solid #4a7c2e;
+    }
+
+    article.spot div.content {
+      padding: 1rem 1.2rem 1.5rem 1.2rem;
+      flex-grow: 1;
+    }
+
+    article.spot h3 {
+      margin-top: 0;
+      color: #3b5720;
+    }
+
+    article.spot p {
+      color: #516e2f;
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 480px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+      margin-top: 1rem;
+    }
+
+    footer {
+      background-color: #4a7c2e;
+      color: #d8e9a8;
+      font-weight: 600;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+      }
+
+      .tourist-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    article.spot:hover img {
+      transform: scale(1.05);
+      transition: transform 0.5s ease;
+    }
+
+
+    body {
+      animation: fadeInPage 1.2s ease-in;
+    }
+
+    @keyframes fadeInPage {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Bukidnon Tourist Portal</h1>
+    <p>Discover Bukidnon's Beauty, Culture & Adventure</p>
+  </header>
+  <nav aria-label="Primary navigation">
+    <div class="nav-content">
+      <div class="nav-links">
+        <a href="#home" tabindex="0">Home</a>
+        <a href="#about" tabindex="0">About</a>
+        <a href="#tourist-spots" tabindex="0">Tourist Spot</a>
+        <a href="#City-council" tabindex="0">City council</a>
+        <a href="#" class="logout-btn" tabindex="0">Logout</a>
+      </div>
+  </nav>
+
+  <main>
+    <section id="home" tabindex="0" aria-label="Home section">
+      <h2>Welcome to Bukidnon</h2>
+      <p>Known as the "Food Basket of Mindanao," Bukidnon is a captivating province in Northern Mindanao, Philippines.
+        With its cool climate, vast agricultural fields, and majestic natural landscapes, it offers a myriad of
+        experiences for nature lovers, adventurers, and culture enthusiasts alike.</p>
+      <p>Explore the wonders of Bukidnon through its popular destinations, rich culture, and breathtaking scenery.</p>
+    </section>
+    <section id="about" tabindex="0" aria-label="About Bukidnon">
+      <h2>About Bukidnon</h2>
+      <p>Bukidnon boasts a diverse cultural heritage from indigenous groups including the Higaonon, Manobo, and
+        Talaandig peoples. The province thrives on agriculture producing corn, pineapple, coffee, and rice, supporting
+        one of the richest provinces in the country.</p>
+      <p>Environmental initiatives focus on forest restoration and wildlife preservation, including efforts to protect
+        the endangered Philippine Eagle. Bukidnon is also known for its festivals, such as the colorful Kaamulan
+        Festival celebrating the indigenous tribes' traditions and unity.</p>
+    </section>
+
+    <section id="tourist-spots" tabindex="0" aria-label="Tourist spots in Bukidnon">
+      <h2>Tourist Spots</h2>
+      <div class="tourist-container">
+        <article class="spot" tabindex="0" aria-label="Dahilayan Park">
+          <img src="./dahilayan-adventure-park.png"
+            alt="View of Dahilayan Adventure Park with zipline and green landscape" />
+          <div class="content">
+            <h3>Dahilayan Adventure Park</h3>
+            <p>A premier destination for thrill-seekers, offering Asia's longest dual zipline among other adventure
+              activities nestled in scenic mountains.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Communal Ranch">
+          <img src="./communal.png" alt="Wide grasslands in Communal Ranch Bukidnon" />
+          <div class="content">
+            <h3>Communal Ranch</h3>
+            <p>Offering a relaxing countryside vibe with sprawling ranch lands ideal for horseback riding and outdoor
+              picnics.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Mount Kidapawan">
+          <img src="./apo.jpg" alt="View of Mount Kidapawan in Bukidnon" />
+          <div class="content">
+            <h3>Mount Apo</h3>
+            <p>A majestic volcano known for trekking and panoramic views of the Cotabato plains and Bukidnon’s
+              landscape.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Lake Apo">
+          <img src="./lake-apo.png" alt="Lake Apo with clear water and surrounding trees in Bukidnon" />
+          <div class="content">
+            <h3>Lake Apo</h3>
+            <p>A peaceful crater lake surrounded by lush forest, suitable for swimming, boating, and camping.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Musean Peak ">
+          <img src="./musuan-peak.png" alt="Beautiful green and landscape of musuan peak" />
+          <div class="content">
+            <h3>Musuan Peak</h3>
+            <p>A charming farm showcasing sustainable agriculture, flowers, and farm-to-table dining experiences in
+              Bukidnon.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Greek Hills">
+          <img src="./greek-hills.png" alt="Scenic views of Greek Hills with rolling green hills and cottages" />
+          <div class="content">
+            <h3>Greek Hills</h3>
+            <p>A scenic resort and getaway place that offers a unique fusion of Bukidnon nature with Greek-inspired
+              architecture and ambiance.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="Cafe sa Bukid">
+          <img src="./cafe-sa-bukidnon.jpg" alt="Cozy interior of Cafe sa Bukid surrounded by green plants" />
+          <div class="content">
+            <h3>Cafe sa Bukid</h3>
+            <p>A cozy cafe known for its locally sourced coffee, artisan dishes, and green-filled ambiance in Bukidnon.
+            </p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="pineapple field">
+          <img src="./pineapple-field.png" alt="" />
+          <div class="content">
+            <h3>Pineapple field</h3>
+            <p>A Delmonte Pineapple Plantation in Bukidnon One of the Largest Pineapple Plantation in The World and
+              green-filled ambiance in Bukidnon.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="alalum falls">
+          <img src="./alalum-falls.png" alt="alalum falls with clear water in Bukidnon" />
+          <div class="content">
+            <h3>Alalum falls</h3>
+            <p>Alalum Falls, a towering cascade that was once an iconic tourist destination of Bukidnon Province, now in
+              a state of neglect.</p>
+          </div>
+        </article>
+        <article class="spot" tabindex="0" aria-label="kampo juan">
+          <img src="./kampo-juan.jpg" alt="kampo juan" />
+          <div class="content">
+            <h3>kampo juan</h3>
+            <p>kampo juan in Bukidnon is known for its eco-adventure farm and heritage resort.</p>
+          </div>
+        </article>
+        <h2 style="margin-top: 3rem;">Tourist Spots Location Map</h2>
+        <p>Find the exact locations of these beautiful destinations on the interactive map below. Zoom and pan to
+          explore Bukidnon.</p>
+        <div class="map-container" role="region" aria-label="Map of tourist spots in Bukidnon">
+
+          <div style="max-width: 800px; margin: 20px auto;">
+            <h3 style="text-align: center;">Map of Bukidnon</h3>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15874.101844218326!2d124.9931332!3d8.1574137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ff7e1e6e41f88d%3A0x6cb9b9379cf927f4!2sBukidnon!5e0!3m2!1sen!2sph!4v1686559687353!5m2!1sen!2sph"
+              width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <p style="margin-top:0.6rem; font-size: 0.9rem; color: #417b1f;">
+            *Interactive map created on Google My Maps showing marked tourist spots in Bukidnon.
+          </p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 Bukidnon Tourism. All rights reserved.
+  </footer>
+</body>
+
+</html>
